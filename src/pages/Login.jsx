@@ -161,9 +161,7 @@ function Login() {
 
       {localUserStream && loginResult === "SUCCESS" && (
         <h2 className="text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block text-purple-600 mt-2">
-            Объект потенциально распознан
-          </span>
+          <span className="block mt-[56px]">Объект потенциально распознан</span>
           <span className="block text-purple-600 mt-2">
             {counter} сек. до утверждения
           </span>
