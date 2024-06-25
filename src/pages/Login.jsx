@@ -10,7 +10,6 @@ function Login() {
   const [modelsLoaded, setModelsLoaded] = useState(false);
   const [faceApiLoaded, setFaceApiLoaded] = useState(false);
   const [loginResult, setLoginResult] = useState("PENDING");
-  const [imageError, setImageError] = useState(false);
   const [counter, setCounter] = useState(5);
   const [labeledFaceDescriptors, setLabeledFaceDescriptors] = useState({});
   const videoRef = useRef();
@@ -27,7 +26,6 @@ function Login() {
   }
 
   const loadModels = async () => {
-    // const uri = import.meta.env.DEV ? "/models" : "/react-face-auth/models";
     const uri = "/models";
 
     await faceapi.nets.ssdMobilenetv1.loadFromUri(uri);
@@ -38,6 +36,7 @@ function Login() {
   useEffect(() => {
     setTempAccount(location?.state?.account);
   }, []);
+
   useEffect(() => {
     if (tempAccount) {
       loadModels()
@@ -67,12 +66,12 @@ function Login() {
           "faceAuth",
           JSON.stringify({ status: true, account: tempAccount })
         );
-        navigate("/protected", { replace: true });
+        navigate("/profile", { replace: true });
       }
 
       return () => clearInterval(counterInterval);
     }
-    setCounter(5);
+    setCounter(3);
   }, [loginResult, counter]);
 
   const getLocalUserVideo = async () => {
@@ -134,22 +133,9 @@ function Login() {
     }
     const descriptions = [];
 
-    let img;
-
-    try {
-      const imgPath =
-        tempAccount?.type === "CUSTOM"
-          ? tempAccount.picture
-          : // : import.meta.env.DEV
-            // ? `/temp-accounts/${tempAccount.picture}`
-            // : `/react-face-auth/temp-accounts/${tempAccount.picture}`;
-            `/temp-accounts/${tempAccount.picture}`;
-
-      img = await faceapi.fetchImage(imgPath);
-    } catch {
-      setImageError(true);
-      return;
-    }
+    const img = await faceapi.fetchImage(
+      `/temp-accounts/${tempAccount.picture}`
+    );
 
     const detections = await faceapi
       .detectSingleFace(img)
@@ -163,58 +149,37 @@ function Login() {
     return new faceapi.LabeledFaceDescriptors(tempAccount.id, descriptions);
   }
 
-  if (imageError) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-[24px] max-w-[840px] mx-auto">
-        <h2 className="text-center text-3xl font-extrabold tracking-tight text-rose-700 sm:text-4xl">
-          <span className="block">
-            Upps! There is no profile picture associated with this account.
-          </span>
-        </h2>
-        <span className="block mt-4">
-          Please contact administration for registration or try again later.
-        </span>
-      </div>
-    );
-  }
-
   return (
     <div className="h-full flex flex-col items-center justify-center gap-[24px] max-w-[720px] mx-auto">
-      {!localUserStream && !modelsLoaded && (
+      {!localUserStream && (
         <h2 className="text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block">
-            You're Attempting to Log In With Your Face.
-          </span>
-          <span className="block text-indigo-600 mt-2">Loading Models...</span>
-        </h2>
-      )}
-      {!localUserStream && modelsLoaded && (
-        <h2 className="text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block text-indigo-600 mt-2">
-            Please Recognize Your Face to Completely Log In.
+          <span className="block text-purple-600 mt-2">
+            Пройдите верификацию лица
           </span>
         </h2>
       )}
+
       {localUserStream && loginResult === "SUCCESS" && (
         <h2 className="text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block text-indigo-600 mt-2">
-            We've successfully recognize your face!
+          <span className="block text-purple-600 mt-2">
+            Объект потенциально распознан
           </span>
-          <span className="block text-indigo-600 mt-2">
-            Please stay {counter} more seconds...
+          <span className="block text-purple-600 mt-2">
+            {counter} сек. до утверждения
           </span>
         </h2>
       )}
       {localUserStream && loginResult === "FAILED" && (
         <h2 className="text-center text-3xl font-extrabold tracking-tight text-rose-700 sm:text-4xl">
-          <span className="block mt-[56px]">
-            Upps! We did not recognize your face.
+          <span className="block mt-[56px]">Верификация не пройдена.</span>
+          <span className="block text-rose-600 mt-2">
+            Потенциально, попытка взлома
           </span>
         </h2>
       )}
       {localUserStream && !faceApiLoaded && loginResult === "PENDING" && (
-        <h2 className="text-center text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block mt-[56px]">Scanning Face...</span>
+        <h2 className="text-center text-3xl font-extrabold tracking-tight text-gray-300 sm:text-4xl">
+          <span className="block mt-[56px]">Сканирую лицо...</span>
         </h2>
       )}
       <div className="w-full">
@@ -253,9 +218,9 @@ function Login() {
                 <button
                   onClick={getLocalUserVideo}
                   type="button"
-                  className="flex justify-center items-center w-full py-2.5 px-5 mr-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg border border-gray-200 inline-flex items-center"
+                  className="justify-center w-full py-2.5 px-5 mr-2 text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 rounded-lg border border-gray-200 inline-flex items-center"
                 >
-                  Scan my face
+                  Сканировать лицо
                 </button>
               </>
             ) : (
@@ -273,7 +238,7 @@ function Login() {
                   <svg
                     aria-hidden="true"
                     role="status"
-                    className="inline mr-2 w-4 h-4 text-gray-200 animate-spin"
+                    className="inline m-0 mr-2 w-4 h-4 text-gray-200 animate-spin"
                     viewBox="0 0 100 101"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -287,7 +252,7 @@ function Login() {
                       fill="#1C64F2"
                     />
                   </svg>
-                  Please wait while models were loading...
+                  Ожидайте загрузки моделей ...
                 </button>
               </>
             )}

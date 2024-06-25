@@ -7,30 +7,23 @@ function User({ user, type }) {
       value={user}
       className={({ checked }) =>
         `${
-          checked ? "bg-indigo-600 bg-opacity-75 text-white" : "bg-white"
+          checked ? "bg-purple-300 bg-opacity-75" : "bg-white"
         } relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
       }
     >
       {({ checked }) => (
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center">
-            <div className="text-sm">
+            <div className="text-2xl">
               <RadioGroup.Label
                 as="div"
-                className={`flex items-center gap-x-6 font-medium ${
-                  checked ? "text-white" : "text-gray-900"
+                className={`flex items-center gap-x-8 font-bold ${
+                  checked ? "text-black" : "text-gray-300"
                 }`}
               >
                 <img
-                  className="object-cover h-10 w-10 rounded-full"
-                  src={
-                    type === "CUSTOM"
-                      ? user.picture
-                      : // : import.meta.env.DEV
-                        // ? `/temp-accounts/${user.picture}`
-                        // : `/react-face-auth/temp-accounts/${user.picture}`
-                        `/temp-accounts/${user.picture}`
-                  }
+                  className="object-cover h-20 w-20 rounded-full"
+                  src={`/temp-accounts/${user.picture}`}
                   alt={user.fullName}
                 />
                 {user.fullName}
@@ -38,8 +31,8 @@ function User({ user, type }) {
             </div>
           </div>
           {checked && (
-            <div className="shrink-0 text-white">
-              <CheckIcon className="h-6 w-6" />
+            <div className="shrink-0">
+              <CheckIcon className="h-12 w-12 m-0" />
             </div>
           )}
         </div>

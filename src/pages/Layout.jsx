@@ -1,8 +1,7 @@
 import React from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import Footer from "../components/Footer";
 
-const whiteList = ["/protected"];
+const whiteList = ["/profile", "/unlock", "/success"];
 
 function Layout() {
   const location = useLocation();
@@ -13,13 +12,12 @@ function Layout() {
   }
 
   if (account && !whiteList.includes(location.pathname)) {
-    return <Navigate to="/protected" />;
+    return <Navigate to="/profile" />;
   }
 
   return (
     <div className="h-screen flex flex-col justify-between">
       <Outlet className="grow" />
-      <Footer />
     </div>
   );
 }

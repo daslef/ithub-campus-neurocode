@@ -3,33 +3,29 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="bg-white py-40 md:pt-60 md:pb-24">
+    <div className="bg-black py-40 md:pt-60 md:pb-24">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-24">
-          <h1 className="block text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-            Welcome To
+          <h1 className="block text-4xl tracking-tight font-extrabold text-purple-100 sm:text-5xl md:text-6xl">
+            Вход в систему
           </h1>
-          <h1 className="block text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-indigo-900">
-            React Face Auth
+          <h1 className="block text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-purple-900 md:leading-normal">
+            контроля доступа
           </h1>
-          <p className="mt-8 text-md text-gray-600 max-w-3xl mx-4 md:mx-16 lg:mx-auto">
-            The Facial Recognition-Based Authentication Application is a
-            cutting-edge web application developed using React and face-api.js.
-            The main objective of the application is to offer a reliable and
-            efficient authentication system by analyzing and verifying the
-            user's facial features.
+          <p className="mt-8 text-md text-gray-300 max-w-3xl mx-4 md:mx-16 lg:mx-auto">
+            Панель управления для лиц, уполномоченных к администрированию
           </p>
           <Link
             to={"/user-select"}
-            className="flex gap-2 mt-12 w-fit mx-auto cursor-pointer z-10 py-3 px-6 rounded-full bg-gradient-to-r from-indigo-300 to-indigo-500"
+            className="flex gap-2 mt-12 w-fit mx-auto cursor-pointer z-10 py-3 px-6 rounded-full bg-gradient-to-r from-purple-300 to-purple-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
-              stroke="white"
-              className="w-6 h-6"
+              stroke="black"
+              className="w-6 h-6 m-0"
             >
               <path
                 strokeLinecap="round"
@@ -42,7 +38,7 @@ function Home() {
                 d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"
               />
             </svg>
-            <span className="text-white">Log In</span>
+            <span className="text-black">Авторизоваться</span>
           </Link>
         </div>
       </div>

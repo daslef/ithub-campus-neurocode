@@ -1,3 +1,193 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.st3 {
+  fill: #ffcb05;
+}
+
+svg#wrapper {
+  height: 60vh;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+body {
+  background-color: black;
+}
+
+svg {
+  height: 90vh;
+  width: 100%;
+  margin: 5vh auto;
+  max-width: 100%;
+  position: relative;
+}
+
+#cypher {
+  transform-origin: 263px 263px;
+}
+
+.form > div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.form-control {
+  /* flex: 1; */
+  height: 50px;
+  min-width: 50px;
+  max-width: 50px;
+}
+
+.form-control:last-child {
+  margin-right: 0;
+}
+
+.blinking {
+  animation: 1s infinite cubic-bezier(0.39, 0.575, 0.565, 1) blink;
+}
+
+@keyframes blink {
+  to {
+    font-size: xx-large;
+  }
+}
+
+:root {
+  --wide: 2em;
+  --angle1: 0;
+  --angle2: -90;
+  --scroll: 100;
+}
+
+#lock {
+  background: #151515;
+  left: calc(50vw - 1.5em);
+  top: calc(50%);
+  position: absolute;
+  width: 3em;
+  height: 3em;
+  border-radius: 100%;
+  box-shadow: 0 0 0.05em 0.05em #0e0e0e;
+  z-index: 2;
+  transition: all 0.5s ease 0s;
+  transform: rotate(0deg);
+}
+
+#lock:before {
+  content: "";
+  border: 0.175em solid #101010;
+  width: 2.4em;
+  height: 2.4em;
+  position: absolute;
+  border-radius: 100%;
+  left: 0.3em;
+  top: 0.3em;
+  background: #848484;
+}
+
+#lock:after {
+  content: "\25CF";
+  color: #101010;
+  width: 0.5em;
+  height: 0.9em;
+  position: absolute;
+  left: 0.75em;
+  top: 0.5em;
+  text-align: center;
+  font-size: 1.5em;
+  line-height: 0.45em;
+  border: 0.15em solid transparent;
+  margin: 0;
+  display: block;
+  border-bottom: 0.5em solid #101010;
+  border-top-width: 0;
+  text-indent: -0.2em;
+  border-radius: 0.125em;
+}
+
+#lock:hover {
+  transition: all 0.5s ease 0s;
+}
+
+#lock.open.active:before {
+  background: #8bc34a;
+}
+#lock.open.active {
+  cursor: pointer;
+}
+
+#lock.closed:before {
+  background: #cc281c;
+}
+
+#lock.closed {
+  transform: rotate(90deg);
+  cursor: pointer;
+}
+
+#lock.closed:hover + #keylock {
+  color: #cc281c;
+}
+
+#lock.open:hover + #keylock {
+  color: #8bc34a;
+}
+#lock.open:hover + #keylock.off {
+  color: #555555;
+}
+
+.storage-room {
+  position: fixed;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background: #efefef;
+  border: 25vh solid #dadada;
+  border-color: #dadada #e4e4e4 #f7f5f5 #e2e2e2;
+  box-shadow: 0 0 0.5em 0.1em #a9a9a961 inset;
+  border-right-width: 25vw;
+  border-left-width: 25vw;
+}
+
+.storage-room:before {
+  background: #00000080;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  content: "";
+  left: 0;
+  top: 0;
+  opacity: calc(var(--scroll) / 100);
+  z-index: 3;
+}
+
+.storage-room:after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  background: url(https://64.media.tumblr.com/352b3cce86dd381b3662bb1a138104f8/tumblr_pvq6no0aPt1uag7foo1_640.gif)
+    no-repeat center center;
+  background-size: cover;
+  box-shadow: 0 0 5em 5em #e2e2e2 inset;
+  z-index: 2;
+  animation: colored 2s 0s infinite;
+}
+
+@keyframes colored {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
