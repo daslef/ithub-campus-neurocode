@@ -29,25 +29,24 @@ export default function Unlock() {
         </h2>
 
         <CypherRing
-          // correctAnswer={[
-          //   "Lynx",
-          //   "Serpens",
-          //   "Canis",
-          //   "Lynx",
-          //   "Triangulum",
-          //   "Leo",
-          //   "Canis",
-          //   "Serpens",
-          //   "Triangulum",
-          //   "Capricornus",
-          //   "Virgo",
-          //   "Leo",
-          //   "Virgo",
-          //   "Taurus",
-          //   "Pegasus",
-          //   "Capricornus",
-          // ]}
-          correctAnswer={["Lynx"]}
+          correctAnswer={[
+            "Lynx",
+            "Serpens",
+            "Canis",
+            "Lynx",
+            "Triangulum",
+            "Leo",
+            "Canis",
+            "Serpens",
+            "Triangulum",
+            "Capricornus",
+            "Virgo",
+            "Leo",
+            "Virgo",
+            "Taurus",
+            "Pegasus",
+            "Capricornus",
+          ]}
           navigate={navigate}
         ></CypherRing>
       </div>
