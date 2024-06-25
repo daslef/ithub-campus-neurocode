@@ -10,7 +10,7 @@ function Login() {
   const [modelsLoaded, setModelsLoaded] = useState(false);
   const [faceApiLoaded, setFaceApiLoaded] = useState(false);
   const [loginResult, setLoginResult] = useState("PENDING");
-  const [counter, setCounter] = useState(5);
+  const [counter, setCounter] = useState(2);
   const [labeledFaceDescriptors, setLabeledFaceDescriptors] = useState({});
   const videoRef = useRef();
   const canvasRef = useRef();
@@ -71,7 +71,7 @@ function Login() {
 
       return () => clearInterval(counterInterval);
     }
-    setCounter(3);
+    setCounter(2);
   }, [loginResult, counter]);
 
   const getLocalUserVideo = async () => {
