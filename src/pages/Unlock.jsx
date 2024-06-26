@@ -22,9 +22,9 @@ export default function Unlock() {
   }
 
   return (
-    <div className="h-full bg-black pt-20">
+    <div className="h-full bg-black pt-8">
       <div className="mx-auto max-w-7xl flex flex-col items-center">
-        <h2 className="text-center text-3xl font-extrabold tracking-tight text-purple-100 sm:text-4xl mb-12">
+        <h2 className="text-center text-3xl font-extrabold tracking-tight text-purple-100 sm:text-4xl mb-4">
           Открыть двери
         </h2>
 
