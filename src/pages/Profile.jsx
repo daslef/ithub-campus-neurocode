@@ -19,12 +19,12 @@ export default function Profile() {
   }
 
   return (
-    <div className="h-full bg-black pt-40 md:pt-60">
+    <div className="h-full bg-black pt-20">
       <div className="mx-auto max-w-7xl">
         <h2 className="text-center text-3xl font-extrabold tracking-tight text-purple-100 sm:text-4xl mb-12">
           Система контроля доступа
         </h2>
-        <div className="text-center mb-24">
+        <div className="text-center mb-12">
           <img
             className="mx-auto mb-8 object-cover h-48 w-48 rounded-full"
             src={`/temp-accounts/${account.picture}`}
